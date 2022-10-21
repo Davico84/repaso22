@@ -1,6 +1,8 @@
 import React from "react";
 import { Component } from "react";
-import axios from "axios";
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { saveToCharList } from '../../Actions'
 
 class Search extends Component {
     constructor(props) {
@@ -14,14 +16,7 @@ class Search extends Component {
         e.preventDefault();
         //OBTENR INFO DE LA API
         //MANDAR ARREGLO
-        axios.get(`https://swapi.dev/api/people/?search=${this.state.searchWord}`)
-        .then(res=>{
-            console.log("RAWRESPONSE", res.data.results);
-            this.props.onSearch(res.data.results);
-        })
-        .catch(err=>{
-            console.log(err);
-        });
+        this.props.saveToCharList(this.state.searchWord);
     }
 
     inputChangeHandler(e){
@@ -49,4 +44,8 @@ class Search extends Component {
     }
 }
 
-export default Search;
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({saveToCharList}, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(Search);

@@ -1,9 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux'
+import { addToFav } from '../../Actions'
 
-const CharacterList = ({characterList, addToFavorites}) => {
+const CharacterList = () => {
+    //ESTADO GLOBAL
+    const charListState = useSelector(state => state.characterList);
 
-    console.log("DELCOMP", characterList);
+    const dispatch = useDispatch()
+
+    console.log("DELCOMP", charListState);
     return(
         <table class="table">
             <thead>
@@ -17,12 +23,12 @@ const CharacterList = ({characterList, addToFavorites}) => {
             </thead>
             <tbody>
                 {/* MAPEO AQUI */}
-                {characterList.map(char =>{
+                {charListState.map(char =>{
                     const id = char.url.split('/')[5];
                     return(
                         <tr key={id}>
                             <th scope="row">
-                                <button onClick={()=>addToFavorites(char)}>Fav</button>
+                                <button onClick={()=>dispatch(addToFav(char))}>Fav</button>
                             </th>
                             <td>
                                 <Link to={`/character/${id}`}>

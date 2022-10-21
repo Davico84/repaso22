@@ -1,9 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { rmFromFav } from '../../Actions';
 
-const Favorites = ({favoriteList, rmFromFavorites}) => {
+const Favorites = () => {
+    const favListState = useSelector(state => state.favoriteList);
 
-    console.log("DELCOMP", favoriteList);
+    const dispatch = useDispatch()
+
+    console.log("FAVORITECOMP", favListState);
     return(
         <table class="table">
             <thead>
@@ -17,12 +22,12 @@ const Favorites = ({favoriteList, rmFromFavorites}) => {
             </thead>
             <tbody>
                 {/* MAPEO AQUI */}
-                {favoriteList.map((char, i) =>{
+                {favListState.map((char, i) =>{
                     const id = char.url.split('/')[5];
                     return(
                         <tr key={i}>
                             <th scope="row">
-                                <button onClick={()=>{rmFromFavorites(char.url)}}>Remove</button>
+                                <button onClick={()=>dispatch(rmFromFav(char.url))}>Remove</button>
                             </th>
                             <td>
                                 <Link to={`/character/${id}`}>
