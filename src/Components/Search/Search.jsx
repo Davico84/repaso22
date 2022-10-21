@@ -14,9 +14,9 @@ class Search extends Component {
         e.preventDefault();
         //OBTENR INFO DE LA API
         //MANDAR ARREGLO
-        axios.get(`https://swapi.dev/api/people`)
+        axios.get(`https://swapi.dev/api/people/?search=${this.state.searchWord}`)
         .then(res=>{
-            console.log(res.data.results);
+            console.log("RAWRESPONSE", res.data.results);
             this.props.onSearch(res.data.results);
         })
         .catch(err=>{

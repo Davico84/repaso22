@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const CharacterList = ({characterList, addToFavorites}) => {
+const Favorites = ({favoriteList, rmFromFavorites}) => {
 
-    console.log("DELCOMP", characterList);
+    console.log("DELCOMP", favoriteList);
     return(
         <table class="table">
             <thead>
@@ -17,12 +17,12 @@ const CharacterList = ({characterList, addToFavorites}) => {
             </thead>
             <tbody>
                 {/* MAPEO AQUI */}
-                {characterList.map(char =>{
+                {favoriteList.map((char, i) =>{
                     const id = char.url.split('/')[5];
                     return(
-                        <tr key={id}>
+                        <tr key={i}>
                             <th scope="row">
-                                <button onClick={()=>addToFavorites(char)}>Fav</button>
+                                <button onClick={()=>{rmFromFavorites(char.url)}}>Remove</button>
                             </th>
                             <td>
                                 <Link to={`/character/${id}`}>
@@ -41,4 +41,4 @@ const CharacterList = ({characterList, addToFavorites}) => {
     )
 }
 
-export default CharacterList;
+export default Favorites;

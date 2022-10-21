@@ -12,7 +12,7 @@ const Navbar = () => {
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <Link to='/character/5' className="nav-link">Character</Link>
+                        <Link to='/favorites' className="nav-link">Favoritos</Link>
                     </li>
                 </ul>
                 <form class="d-flex">
